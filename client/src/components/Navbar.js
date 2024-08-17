@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from '../styles/Navbar.styles';
+import siteLogo from "../assets/site-logo.png"
 
 const NavBar = () => {
     const location = useLocation();
@@ -31,6 +32,11 @@ const NavBar = () => {
 
     return (
         <nav style={styles.navbar}>
+            <div style={styles.logoContainer}>
+                <Link to="/">
+                    <img src={siteLogo} alt="Logo" style={styles.logo} />
+                </Link>
+            </div>
             <div style={styles.navContainer}>
                 <div style={styles.navInner}>
                     <NavLink to="/">Home</NavLink>

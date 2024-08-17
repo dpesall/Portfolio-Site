@@ -3,10 +3,22 @@
 const styles = {
     navbar: {
         backgroundColor: '#171717',
-        padding: '5px 0',
+        padding: '0px 5px',
         border: '2px solid black',
+        display: 'flex',
+        alignItems: 'center',
+    },
+    logoContainer: {
+        flexShrink: 0,
+        marginRight: '20px',
+    },
+    logo: {
+        paddingTop: '5px',
+        height: '50px',
+        width: 'auto',
     },
     navContainer: {
+        flex: 1,
         display: 'flex',
         justifyContent: 'center',
     },
@@ -14,17 +26,15 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         gap: '10px',
-        width: 'auto',
     },
     navItem: {
         fontSize: '1.2rem',
         listStyleType: 'none',
-        width: '150px',
     },
     navLink: {
         color: '#ffffff',
         textDecoration: 'none',
-        padding: '10px 20px',
+        padding: '0px 20px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
