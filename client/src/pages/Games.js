@@ -27,6 +27,8 @@ const Games = () => {
         link="/games/snake"
         logo={snakeIcon}
       />
+      
+      {/* 
       <GameRow
         gameTitle={'Game 2'}
         description={'Game description goes here.'}
@@ -39,6 +41,7 @@ const Games = () => {
         link="/games"
         logo={snakeIcon}
       />
+      */}
     </div>
   );
 };
