@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import styles from "../styles/Animations.styles.js";
+import { isMobile } from 'react-device-detect';
 
 const LoadingAnimation = () => (
   <div className={css(styles.loader)}>
@@ -55,14 +56,6 @@ const ShakeAnimation = () => (
 
 const BounceAnimation = () => (
   <div className={css(styles.bounceBox)}></div>
-);
-
-const FloatingBubbles = () => (
-  <div className={css(styles.floatingBubblesContainer)}>
-    {[...Array(5)].map((_, i) => (
-      <div key={i} className={css(styles.bubble, styles[`bubble${i + 1}`])}></div>
-    ))}
-  </div>
 );
 
 const TextScramble = () => {
@@ -141,11 +134,6 @@ const Animations = () => {
       title: "Bounce",
       description: "A box that moves up and down.",
       component: BounceAnimation
-    },
-    {
-      title: "Floating Bubbles",
-      description: "Multiple bubbles floating upwards with different speeds and sizes.",
-      component: FloatingBubbles
     },
     {
       title: "Text Scramble",

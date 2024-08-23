@@ -7,6 +7,11 @@ const styles = {
         border: '2px solid black',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 1000,
     },
     logoContainer: {
         flexShrink: 0,
@@ -18,23 +23,26 @@ const styles = {
         width: 'auto',
     },
     navContainer: {
-        flex: 1,
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
     },
     navInner: {
         display: 'flex',
         justifyContent: 'center',
         gap: '10px',
+        listStyleType: 'none',
+        padding: 0,
+        margin: 0,
     },
     navItem: {
         fontSize: '1.2rem',
-        listStyleType: 'none',
     },
     navLink: {
         color: '#ffffff',
         textDecoration: 'none',
-        padding: '0px 20px',
+        padding: '10px 20px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -44,6 +52,32 @@ const styles = {
     },
     activeNavLink: {
         fontWeight: 'bold',
+    },
+    hamburgerContainer: {
+        flexDirection: 'column',
+        cursor: 'pointer',
+        paddingRight: '25px'
+    },
+    hamburger: {
+        width: '25px',
+        height: '3px',
+        backgroundColor: '#ffffff',
+        margin: '4px 0',
+    },
+    navContainerMobile: {
+        position: 'absolute',
+        top: '60px',
+        left: 0,
+        right: 0,
+        backgroundColor: '#171717',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        zIndex: 1000,
+    },
+    navInnerMobile: {
+        flexDirection: 'column',
+        gap: '20px',
     },
 };
 

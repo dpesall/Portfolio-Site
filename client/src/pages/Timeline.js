@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from 'react';
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
+import { useSwipeable } from 'react-swipeable';
 import { css } from 'aphrodite';
 import styles from "../styles/Timeline.styles.js";
 
 const Timeline = () => {
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(isMobile ? 12.5 : 0);
   const sliderRef = useRef(null);
+  const slideContainerRef = useRef(null);
+
   const slides = [
     {
       title: "Education",
@@ -13,7 +17,7 @@ const Timeline = () => {
         <>
           <h3>University of North Dakota</h3>
           <h4>B.S. Computer Science & B.A. Mathematics</h4>
-          <p>AUGUST 2016 – MAY 2020 </p>
+          <p>AUGUST 2016 – MAY 2020</p>
           <p>I attended the University of North Dakota in Grand Forks, ND. If you've ever been there, you know how brutally cold
              the winters there can be, but I stuck it out all four years and came away with majors in both Computer Science and Mathematics. 
           </p>
@@ -22,7 +26,7 @@ const Timeline = () => {
       )
     },
     {
-      title: "Internship",
+      title: "Ameriprise Financial",
       content: (
         <>
           <h3>Software Engineer Intern</h3>
@@ -63,7 +67,10 @@ const Timeline = () => {
   };
 
   const handleWheel = (event) => {
-    if (sliderRef.current && sliderRef.current.contains(event.target)) {
+    if (
+      (sliderRef.current && sliderRef.current.contains(event.target)) ||
+      (slideContainerRef.current && slideContainerRef.current.contains(event.target))
+    ) {
       event.preventDefault();
       const direction = event.deltaY > 0 ? 1 : -1;
       const newValue = Math.min(Math.max(sliderValue + direction * 6.25, 0), 100);
@@ -78,30 +85,58 @@ const Timeline = () => {
     };
   }, [sliderValue]);
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => setSliderValue((prev) => Math.min(prev + 25, 87.5)),
+    onSwipedRight: () => setSliderValue((prev) => Math.max(prev - 25, 12.5)),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <div className={css(styles.container)}>
-      <h1 className={css(styles.header)}>My Timeline</h1>
-      <div className={css(styles.slideContainer)}>
-        <h2 className={css(styles.slideTitle)}>{slides[currentSlide].title}</h2>
-        <div className={css(styles.slideContent)}>
-          {slides[currentSlide].content}
+    <div className={isMobile ? css(styles.containerMobile) : css(styles.container)}>
+      <BrowserView>
+        <h1 className={css(styles.header)}>My Timeline</h1>
+        <div ref={slideContainerRef} className={css(styles.slideContainer)}>
+          <h2 className={css(styles.slideTitle)}>{slides[currentSlide].title}</h2>
+          <div className={css(styles.slideContent)}>
+            {slides[currentSlide].content}
+          </div>
         </div>
-      </div>
-      <div className={css(styles.sliderContainer)} ref={sliderRef}>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={sliderValue}
-          onChange={handleSliderChange}
-          className={css(styles.slider)}
-        />
-        <div className={css(styles.sliderLabels)}>
-          {slides.map((slide, index) => (
-            <span key={index} className={css(styles.sliderLabel)}>{slide.title}</span>
-          ))}
+        <div className={css(styles.sliderContainer)} ref={sliderRef}>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={sliderValue}
+            onChange={handleSliderChange}
+            className={css(styles.slider)}
+          />
+          <div className={css(styles.sliderLabels)}>
+            {slides.map((slide, index) => (
+              <span key={index} className={css(styles.sliderLabel)}>{slide.title}</span>
+            ))}
+          </div>
         </div>
-      </div>
+      </BrowserView>
+      <MobileView>
+        <div {...swipeHandlers} className={css(styles.mobileSlideContainer)}>
+          <h2 className={css(styles.slideTitle)}>{slides[currentSlide].title}</h2>
+          <div className={css(styles.slideContent)}>
+            {slides[currentSlide].content}
+          </div>
+        </div>
+        <div className={css(styles.sliderContainer, styles.disabledSlider)}>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={sliderValue}
+            className={css(styles.slider)}
+            disabled
+          />
+        </div>
+        <p className={css(styles.swipeText)}>Swipe to progress</p>
+      </MobileView>
     </div>
   );
 };

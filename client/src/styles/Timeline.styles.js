@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     padding: '30px 200px',
     paddingBottom: '80px',
     fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#111'
+    backgroundColor: '#111',
   },
   header: {
     textAlign: 'center',
@@ -24,6 +24,17 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
   },
+  mobileSlideContainer: {
+    backgroundColor: '#262626',
+    borderRadius: '8px',
+    padding: '20px',
+    marginBottom: '20px',
+    minHeight: '425px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    touchAction: 'pan-y',
+  },
   slideTitle: {
     color: '#FFF',
     marginBottom: '15px',
@@ -35,6 +46,10 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: '20px 0',
     position: 'relative',
+  },
+  disabledSlider: {
+    opacity: '0.5',
+    pointerEvents: 'none',
   },
   slider: {
     width: '100%',
@@ -80,6 +95,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: '14px',
     padding: '5px 0',
+  },
+  swipeText: {
+    color: '#FFF',
+    textAlign: 'center',
+    marginTop: '10px',
+    fontSize: '16px',
   },
 });
 

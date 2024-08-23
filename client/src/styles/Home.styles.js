@@ -16,9 +16,18 @@ const styles = {
     maxWidth: '1200px',
     marginBottom: '40px',
   },
+  contentWrapperMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%',
+  },
   imageContainer: {
     flexShrink: 0,
     marginRight: '40px',
+  },
+  imageContainerMobile: {
+    marginBottom: '20px',
   },
   profileImage: {
     width: '500px',
@@ -28,17 +37,33 @@ const styles = {
     paddingTop: '20px',
     border: '10px solid black',
   },
+  profileImageMobile: {
+    width: '200px',
+    height: 'auto',
+    borderRadius: '50%',
+    backgroundColor: '#FFF',
+    paddingTop: '10px',
+    border: '5px solid black',
+  },
   textContainer: {
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
   },
+  textContainerMobile: {
+    textAlign: 'left',
+    padding: '0 20px',
+    width: '90%',
+  },
   heading: {
     color: '#ffffff',
     fontSize: '3rem',
     margin: '0 0 20px 0',
     lineHeight: '1.2',
+  },
+  headingMobile: {
+    fontSize: '2rem',
   },
   subheading: {
     color: '#ffffff',
@@ -47,11 +72,17 @@ const styles = {
     lineHeight: '1.4',
     fontWeight: 'normal',
   },
+  subheadingMobile: {
+    fontSize: '1.2rem',
+  },
   linkImagesContainer: {
     display: 'flex',
     justifyContent: 'center',
     gap: '30px',
-    marginTop: '20px',
+    marginTop: '40px',
+  },
+  linkImagesContainerMobile: {
+    gap: '50px',
   },
   linkImageWrapper: {
     display: 'inline-block',
@@ -60,6 +91,10 @@ const styles = {
   linkImage: {
     width: '100px',
     height: '100px',
+  },
+  linkImageMobile: {
+    width: '50px',
+    height: '50px',
   },
 };
 
