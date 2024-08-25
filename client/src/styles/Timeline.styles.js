@@ -105,3 +105,5 @@ const styles = StyleSheet.create({
 });
 
 export default styles;
+
+// TODO: On mobile, replace scroll bar tracking with little bubbles where the current slide is a blue bubble

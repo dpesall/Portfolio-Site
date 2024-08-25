@@ -74,7 +74,8 @@ const Snake = () => {
       newSnake.unshift(head);
 
       if (food && head.x === food.x && head.y === food.y) {
-        setScore(prevScore => prevScore + 1);
+        const prevScore = score;
+        setScore(prevScore + 1);
         setFood(null);
       } else {
         newSnake.pop();
