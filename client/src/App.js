@@ -9,6 +9,7 @@ import Timeline from './pages/Timeline';
 import Animations from './pages/Animations';
 import Games from './pages/Games';
 import Snake from './pages/games/Snake';
+import BrickBreak from './pages/games/BrickBreak';
 
 // Startup:
 // npm run dev  -- backend
@@ -33,6 +34,7 @@ function App() {
         <Route path="/animations" element={<Animations />} />
         <Route path="/games" element={<Games />} />
         <Route path="/games/snake" element={<Snake />} />
+        <Route path="/games/brick-break" element={<BrickBreak />} />
       </Routes>
     </Router>
   );

@@ -34,6 +34,12 @@ const Games = () => {
             link="/games/snake"
             logo={snakeIcon}
           />
+          <GameRow
+            gameTitle={'Brick Break'}
+            description={'Brick Break.'}
+            link="/games/brick-break"
+            logo={snakeIcon}
+          />
         </div>
       </BrowserView>
       <MobileView>
@@ -42,6 +48,14 @@ const Games = () => {
             gameTitle={'Snake'}
             description={'Control a snake using arrow keys to eat food and grow longer without hitting the walls or itself.'}
             link="/games/snake"
+            logo={snakeIcon}
+            disabled={true}
+            isMobile={true}
+          />
+          <GameRow
+            gameTitle={'Brick Break'}
+            description={'Brick Break.'}
+            link="/games/brick-break"
             logo={snakeIcon}
             disabled={true}
             isMobile={true}

@@ -154,6 +154,37 @@ const styles = {
   gameDescriptionMobile: {
     fontSize: '0.8em',
   },
+  brickBreakArea: {
+    position: 'relative',
+    width: '1000px',
+    height: '600px',
+    backgroundColor: '#000',
+    border: '2px solid #333',
+    overflow: 'hidden',
+    marginTop: '20px',
+  },
+  paddle: {
+    position: 'absolute',
+    bottom: '20px',
+    width: '150px',
+    height: '10px',
+    backgroundColor: '#fff',
+  },
+  ball: {
+    position: 'absolute',
+    width: '20px',
+    height: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '50%',
+  },
+  message: {
+    position: 'absolute',
+    bottom: '50px',
+    width: '100%',
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: '18px',
+  },
 };
 
 export default styles;
