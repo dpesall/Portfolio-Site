@@ -1,16 +1,2 @@
-body {
-  background-color: #2b2b2b;
-  color: #ffffff;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  padding-top: 50px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-}
-
-p {
-  margin-bottom: 1em;
-}
+/* App-specific styles */
+/* All base styles are now handled by Tailwind CSS in index.css */
