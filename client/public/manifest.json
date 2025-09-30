@@ -3,17 +3,12 @@
   "name": "Portfolio site created by Drew Pesall using React and Node.",
   "icons": [
     {
-      "src": "site-icon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
+      "src": "Kangaroo-circle.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "Kangaroo-circle.png",
       "type": "image/png",
       "sizes": "512x512"
     }

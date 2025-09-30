@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { FiHome, FiTrendingUp, FiCalendar, FiDollarSign, FiX } from 'react-icons/fi';
 import Navigation from '../components/layout/Navigation';
 
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('guess-nexus');
+  const [imageViewer, setImageViewer] = useState<{ src: string; alt: string } | null>(null);
 
   const navigationItems = [
     {
@@ -25,6 +27,17 @@ const Portfolio: React.FC = () => {
         { id: 'anthem-sigma-features', label: 'Features' },
         { id: 'anthem-sigma-stack', label: 'Tech Details' },
         { id: 'anthem-sigma-highlights', label: 'Highlights' }
+      ]
+    },
+    {
+      id: 'future-worth',
+      title: 'FutureWorth',
+      color: 'green',
+      sections: [
+        { id: 'future-worth', label: 'Overview' },
+        { id: 'future-worth-features', label: 'Calculators' },
+        { id: 'future-worth-stack', label: 'Tech Stack' },
+        { id: 'future-worth-screens', label: 'Screenshots' }
       ]
     }
   ];
@@ -58,6 +71,16 @@ const Portfolio: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setImageViewer(null);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
   const getColorClasses = (color: string, isActive: boolean) => {
     const colorMap = {
       blue: isActive
@@ -65,7 +88,10 @@ const Portfolio: React.FC = () => {
         : "text-blue-400 border-transparent hover:border-blue-400/50 hover:bg-blue-400/5",
       purple: isActive
         ? "text-purple-300 border-purple-400 bg-purple-400/10"
-        : "text-purple-400 border-transparent hover:border-purple-400/50 hover:bg-purple-400/5"
+        : "text-purple-400 border-transparent hover:border-purple-400/50 hover:bg-purple-400/5",
+      green: isActive
+        ? "text-green-300 border-green-400 bg-green-400/10"
+        : "text-green-400 border-transparent hover:border-green-400/50 hover:bg-green-400/5"
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.blue;
   };
@@ -136,8 +162,8 @@ const Portfolio: React.FC = () => {
                       onClick={() => scrollToSection(project.id)}
                       className={`text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200 ${
                         project.sections.some(section => section.id === activeSection)
-                          ? (project.color === 'blue' ? 'text-blue-300' : 'text-purple-300')
-                          : (project.color === 'blue' ? 'text-blue-400' : 'text-purple-400')
+                          ? (project.color === 'blue' ? 'text-blue-300' : project.color === 'purple' ? 'text-purple-300' : 'text-green-300')
+                          : (project.color === 'blue' ? 'text-blue-400' : project.color === 'purple' ? 'text-purple-400' : 'text-green-400')
                       }`}
                     >
                       {project.title}
@@ -511,6 +537,258 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Project Divider */}
+      <section className="bg-gray-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-700/50"></div>
+        </div>
+      </section>
+
+      {/* FutureWorth Hero Section */}
+      <section id="future-worth" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Future <span className="text-green-400">Worth</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
+              Focused, high-performance financial calculators for mortgages, compound growth,
+              retirement scenarios, and loan payoff strategies — with responsive charts and full schedules.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://github.com/dpesall/Future-Worth"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-lg transition-colors duration-200"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View Code
+              </a>
+              <a
+                href="#future-worth-screens"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-semibold text-lg border border-gray-700 hover:border-gray-600 transition-all duration-200"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M4 6h8M4 10h8M4 14h8M4 18h8" />
+                </svg>
+                View Screenshots
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FutureWorth Calculators */}
+      <section id="future-worth-features" className="bg-gray-800/50 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Calculators</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Explore mortgage payments, compound growth, retirement scenarios, and loan payoff strategies
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <FiHome className="w-8 h-8 text-green-400" />
+                <h3 className="text-xl font-semibold text-white ml-3">Mortgage</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Estimate P&I, escrow, PMI drop‑off, payoff date, and view a full amortization schedule.</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <FiTrendingUp className="w-8 h-8 text-green-400" />
+                <h3 className="text-xl font-semibold text-white ml-3">Compound Interest</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Project future value with contributions, annual increases, compounding cadence, and inflation adjustments.</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <FiCalendar className="w-8 h-8 text-green-400" />
+                <h3 className="text-xl font-semibold text-white ml-3">Retirement</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Model accumulation and drawdown with inflation‑adjusted income and depletion visibility.</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <FiDollarSign className="w-8 h-8 text-green-400" />
+                <h3 className="text-xl font-semibold text-white ml-3">Loan Payoff</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Compare strategies with extra payments and fees, showing payoff date and interest saved.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FutureWorth Tech Stack */}
+      <section id="future-worth-stack" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Stack</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Built with modern React, responsive charts, and clean SCSS architecture
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Frontend
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  React 18 with React Router
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  JavaScript (ESNext)
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  Component-driven architecture with custom hooks
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                Charts & Styling
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  Recharts for responsive data visualization
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  Sass (SCSS) with strict per‑component BEM
+                </li>
+                <li className="flex items-center">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                  Accessibility and responsive layout best practices
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FutureWorth Screenshots */}
+      <section id="future-worth-screens" className="bg-gray-800/50 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Screenshots</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              A few highlights from the calculators and home experience
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-green-400/40 transition-all duration-200 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => setImageViewer({src:'/fw-home-page.png', alt:'FutureWorth Home'})}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setImageViewer({src:'/fw-home-page.png', alt:'FutureWorth Home'})}
+            >
+              <img src="/fw-home-page.png" alt="FutureWorth Home" className="w-full h-56 object-cover" />
+              <div className="p-4 border-t border-gray-700/50">
+                <p className="text-sm text-gray-300">Home</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-green-400/40 transition-all duration-200 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => setImageViewer({src:'/fw-compound-interest.jpeg', alt:'Compound Interest Calculator'})}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setImageViewer({src:'/fw-compound-interest.jpeg', alt:'Compound Interest Calculator'})}
+            >
+              <img src="/fw-compound-interest.jpeg" alt="Compound Interest Calculator" className="w-full h-56 object-cover" />
+              <div className="p-4 border-t border-gray-700/50">
+                <p className="text-sm text-gray-300">Compound Interest</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-green-400/40 transition-all duration-200 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => setImageViewer({src:'/fw-mortgage.jpeg', alt:'Mortgage Calculator'})}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setImageViewer({src:'/fw-mortgage.jpeg', alt:'Mortgage Calculator'})}
+            >
+              <img src="/fw-mortgage.jpeg" alt="Mortgage Calculator" className="w-full h-56 object-cover" />
+              <div className="p-4 border-t border-gray-700/50">
+                <p className="text-sm text-gray-300">Mortgage</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-green-400/40 transition-all duration-200 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => setImageViewer({src:'/fw-retirement.jpeg', alt:'Retirement Savings Calculator'})}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setImageViewer({src:'/fw-retirement.jpeg', alt:'Retirement Savings Calculator'})}
+            >
+              <img src="/fw-retirement.jpeg" alt="Retirement Savings Calculator" className="w-full h-56 object-cover" />
+              <div className="p-4 border-t border-gray-700/50">
+                <p className="text-sm text-gray-300">Retirement Savings</p>
+              </div>
+            </div>
+
+            <div
+              className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700/50 hover:border-green-400/40 transition-all duration-200 cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onClick={() => setImageViewer({src:'/fw-loan-payoff.jpeg', alt:'Loan Payoff Calculator'})}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setImageViewer({src:'/fw-loan-payoff.jpeg', alt:'Loan Payoff Calculator'})}
+            >
+              <img src="/fw-loan-payoff.jpeg" alt="Loan Payoff Calculator" className="w-full h-56 object-cover" />
+              <div className="p-4 border-t border-gray-700/50">
+                <p className="text-sm text-gray-300">Loan Payoff</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal for Screenshots */}
+      {imageViewer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70" onClick={() => setImageViewer(null)} />
+          <div className="relative z-10 inline-block max-w-[92vw] md:max-w-[84vw]">
+            <button
+              aria-label="Close image viewer"
+              onClick={() => setImageViewer(null)}
+              className="absolute -top-3 -right-3 bg-gray-800 text-white rounded-full p-2 shadow-lg border border-gray-700 hover:bg-gray-700"
+            >
+              <FiX className="w-5 h-5" />
+            </button>
+            <img
+              src={imageViewer.src}
+              alt={imageViewer.alt}
+              className="max-w-[92vw] md:max-w-[84vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl border border-gray-700"
+            />
+          </div>
+        </div>
+      )}
+      
 
       </div> {/* End of Main Content */}
     </div>

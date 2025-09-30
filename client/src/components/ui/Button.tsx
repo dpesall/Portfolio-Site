@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variantClasses = {
-    primary: 'bg-space-blue-900 hover:bg-space-blue-800 text-white focus:ring-space-blue-500 shadow-lg hover:shadow-xl transform hover:scale-105',
+    primary: 'bg-space-blue-900 hover:bg-space-blue-800 text-white focus:ring-space-blue-500 shadow-lg hover:shadow-xl',
     secondary: 'border-2 border-cyber-cyan-500 text-cyber-cyan-500 hover:bg-cyber-cyan-500 hover:text-white focus:ring-cyber-cyan-500',
     ghost: 'text-gray-600 dark:text-gray-300 hover:text-space-blue-900 dark:hover:text-cyber-cyan-500 hover:bg-gray-100 dark:hover:bg-gray-800'
   };
@@ -61,8 +61,8 @@ const Button: React.FC<ButtonProps> = ({
         target={external ? '_blank' : undefined}
         rel={external ? 'noopener noreferrer' : undefined}
         className={combinedClasses}
-        whileHover={{ scale: variant === 'ghost' ? 1 : 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1 }}
+        whileTap={{ scale: 1 }}
       >
         {content}
       </motion.a>
@@ -75,8 +75,8 @@ const Button: React.FC<ButtonProps> = ({
       className={combinedClasses}
       disabled={isLoading || disabled}
       onClick={onClick}
-      whileHover={{ scale: variant === 'ghost' ? 1 : 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1 }}
+      whileTap={{ scale: 1 }}
     >
       {content}
     </motion.button>

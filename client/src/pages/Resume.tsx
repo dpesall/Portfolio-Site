@@ -8,9 +8,11 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const Resume: React.FC = () => {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
+    setIsLoading(false);
   };
 
   const goToPrevPage = () => {
@@ -34,29 +36,39 @@ const Resume: React.FC = () => {
           {/* PDF Viewer */}
           <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700/50">
             <div className="flex flex-col items-center">
-              <Document
-                file="/Drew-Pesall-Resume.pdf"
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={
-                  <div className="text-center py-8">
-                    <div className="text-white text-lg">Loading PDF...</div>
+              {isLoading && (
+                <div
+                  className="flex items-center justify-center bg-gray-700/30 rounded-lg animate-pulse"
+                  style={{ width: '832px', height: '1139px', maxWidth: '100%' }}
+                >
+                  <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-gray-400 border-t-blue-400 rounded-full animate-spin mb-4 mx-auto"></div>
+                    <div className="text-white text-lg">Loading Resume...</div>
                   </div>
-                }
-                error={
-                  <div className="text-center py-8">
-                    <div className="text-red-400 text-lg">Failed to load PDF</div>
-                  </div>
-                }
-                className="flex justify-center"
-              >
-                <Page
-                  pageNumber={pageNumber}
-                  width={Math.min(800, window.innerWidth - 100)}
-                  renderTextLayer={false}
-                  renderAnnotationLayer={false}
-                  className="shadow-lg"
-                />
-              </Document>
+                </div>
+              )}
+
+              <div style={{ display: isLoading ? 'none' : 'block' }}>
+                <Document
+                  file="/Drew-Pesall-Resume.pdf"
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  loading={null}
+                  error={
+                    <div className="text-center py-8">
+                      <div className="text-red-400 text-lg">Failed to load PDF</div>
+                    </div>
+                  }
+                  className="flex justify-center"
+                >
+                  <Page
+                    pageNumber={pageNumber}
+                    width={Math.min(800, window.innerWidth - 100)}
+                    renderTextLayer={false}
+                    renderAnnotationLayer={false}
+                    className="shadow-lg"
+                  />
+                </Document>
+              </div>
 
 
               {/* Download Button */}
