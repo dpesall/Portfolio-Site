@@ -19,17 +19,6 @@ const Portfolio: React.FC = () => {
       ]
     },
     {
-      id: 'anthem-sigma',
-      title: 'Anthem Sigma',
-      color: 'purple',
-      sections: [
-        { id: 'anthem-sigma', label: 'Overview' },
-        { id: 'anthem-sigma-features', label: 'Features' },
-        { id: 'anthem-sigma-stack', label: 'Tech Details' },
-        { id: 'anthem-sigma-highlights', label: 'Highlights' }
-      ]
-    },
-    {
       id: 'future-worth',
       title: 'FutureWorth',
       color: 'green',
@@ -38,6 +27,27 @@ const Portfolio: React.FC = () => {
         { id: 'future-worth-features', label: 'Calculators' },
         { id: 'future-worth-stack', label: 'Tech Stack' },
         { id: 'future-worth-screens', label: 'Screenshots' }
+      ]
+    },
+    {
+      id: 'learn2',
+      title: 'LEARN²',
+      color: 'cyan',
+      sections: [
+        { id: 'learn2', label: 'Overview' },
+        { id: 'learn2-features', label: 'Features' },
+        { id: 'learn2-stack', label: 'Tech Stack' }
+      ]
+    },
+    {
+      id: 'anthem-sigma',
+      title: 'Anthem Sigma',
+      color: 'purple',
+      sections: [
+        { id: 'anthem-sigma', label: 'Overview' },
+        { id: 'anthem-sigma-features', label: 'Features' },
+        { id: 'anthem-sigma-stack', label: 'Tech Details' },
+        { id: 'anthem-sigma-highlights', label: 'Highlights' }
       ]
     }
   ];
@@ -91,7 +101,10 @@ const Portfolio: React.FC = () => {
         : "text-purple-400 border-transparent hover:border-purple-400/50 hover:bg-purple-400/5",
       green: isActive
         ? "text-green-300 border-green-400 bg-green-400/10"
-        : "text-green-400 border-transparent hover:border-green-400/50 hover:bg-green-400/5"
+        : "text-green-400 border-transparent hover:border-green-400/50 hover:bg-green-400/5",
+      cyan: isActive
+        ? "text-cyan-300 border-cyan-400 bg-cyan-400/10"
+        : "text-cyan-400 border-transparent hover:border-cyan-400/50 hover:bg-cyan-400/5"
     };
     return colorMap[color as keyof typeof colorMap] || colorMap.blue;
   };
@@ -155,15 +168,15 @@ const Portfolio: React.FC = () => {
           <div className="flex flex-1 flex-col overflow-y-auto pt-20 pb-6">
             <div className="px-6 py-4">
               <h2 className="text-lg font-semibold text-white mb-4">Projects</h2>
-              <nav className="space-y-6">
+              <nav className="space-y-4">
                 {navigationItems.map((project) => (
-                  <div key={project.id} className="space-y-2">
+                  <div key={project.id} className="space-y-1">
                     <button
                       onClick={() => scrollToSection(project.id)}
                       className={`text-sm font-medium cursor-pointer hover:opacity-80 transition-opacity duration-200 ${
                         project.sections.some(section => section.id === activeSection)
-                          ? (project.color === 'blue' ? 'text-blue-300' : project.color === 'purple' ? 'text-purple-300' : 'text-green-300')
-                          : (project.color === 'blue' ? 'text-blue-400' : project.color === 'purple' ? 'text-purple-400' : 'text-green-400')
+                          ? (project.color === 'blue' ? 'text-blue-300' : project.color === 'purple' ? 'text-purple-300' : project.color === 'green' ? 'text-green-300' : project.color === 'cyan' ? 'text-cyan-300' : 'text-blue-300')
+                          : (project.color === 'blue' ? 'text-blue-400' : project.color === 'purple' ? 'text-purple-400' : project.color === 'green' ? 'text-green-400' : project.color === 'cyan' ? 'text-cyan-400' : 'text-blue-400')
                       }`}
                     >
                       {project.title}
@@ -173,7 +186,7 @@ const Portfolio: React.FC = () => {
                         <li key={section.id}>
                           <button
                             onClick={() => scrollToSection(section.id)}
-                            className={`w-full text-left px-3 py-2 text-sm rounded-md border-l-2 transition-all duration-200 ${
+                            className={`w-full text-left px-2 py-1.5 text-sm rounded-md border-l-2 transition-all duration-200 ${
                               getColorClasses(project.color, activeSection === section.id)
                             }`}
                           >
@@ -350,8 +363,117 @@ const Portfolio: React.FC = () => {
         </div>
       </section>
 
+      {/* LEARN2 Hero Section */}
+      <section id="learn2-hidden" className="hidden bg-gray-900 py-20 scroll-mt-24" aria-hidden="true">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              LEARN<span className="text-blue-400 align-text-top">²</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-4 max-w-4xl mx-auto">
+              Front-end for the Landfalling Event Atmospheric River Neural Network (LEARN²):
+              a decision-support tool delivering extreme rainfall predictions up to 10 days out
+              using ensemble NWP guidance, remotely-sensed fields, teleconnection indices, and
+              neural networks with a voting mechanism.
+            </p>
+
+            <div className="flex justify-center">
+              <a
+                href="https://github.com/dpesall/Learn2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition-colors duration-200"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LEARN2 Features */}
+      <section id="learn2-features-hidden" className="hidden bg-gray-800/50 py-20 scroll-mt-24" aria-hidden="true">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Key Features</h2>
+            <p className="text-gray-400 max-w-3xl mx-auto">
+              Forecast visualization and data access for extreme rainfall prediction across 1–10 day horizons
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Ensemble-driven Predictions</h3>
+              <p className="text-gray-300">Leverages GEFS and ECMWF ensembles with a neural “voting” approach to identify threshold exceedance.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Multiple Threshold Modes</h3>
+              <p className="text-gray-300">Switch between percentile (50th–99th) and static inch thresholds (0.25–4.0) for 10 look‑ahead days.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Data Access APIs</h3>
+              <p className="text-gray-300">Signed S3 image URLs and CSV retrieval endpoints back the UI for rapid per‑day exploration.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Operational Focus</h3>
+              <p className="text-gray-300">Designed to aid meteorologists and hydrologists in medium‑range decision windows with higher confidence.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">User Feedback</h3>
+              <p className="text-gray-300">Built‑in feedback submission via Outlook email integration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LEARN2 Tech Stack */}
+      <section id="learn2-stack-hidden" className="hidden bg-gray-900 py-20 scroll-mt-24" aria-hidden="true">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Stack</h2>
+            <p className="text-gray-400 max-w-3xl mx-auto">
+              Node.js + Express server powering a static front‑end with AWS S3 integrations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Backend
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Node.js with Express</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>AWS SDK (S3 signed URLs, object listing)</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>fast-csv for CSV parsing</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Nodemailer for feedback handling</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>dotenv for configuration</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                Frontend
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Static HTML/CSS with Bootstrap</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Interactive UI backed by S3 endpoints</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Deployed with HTTP/HTTPS server modes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Anthem Sigma Hero Section */}
-      <section id="anthem-sigma" className="bg-gray-900 py-20 scroll-mt-24">
+      <section id="anthem-sigma-hidden" className="hidden bg-gray-900 py-20 scroll-mt-24" aria-hidden="true">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -391,7 +513,7 @@ const Portfolio: React.FC = () => {
       </section>
 
       {/* Anthem Sigma Key Features */}
-      <section id="anthem-sigma-features" className="bg-gray-800/50 py-20 scroll-mt-24">
+      <section id="anthem-sigma-features-hidden" className="hidden bg-gray-800/50 py-20 scroll-mt-24" aria-hidden="true">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Key Features</h2>
@@ -435,7 +557,7 @@ const Portfolio: React.FC = () => {
       </section>
 
       {/* Anthem Sigma Technical Stack */}
-      <section id="anthem-sigma-stack" className="bg-gray-900 py-20 scroll-mt-24">
+      <section id="anthem-sigma-stack-hidden" className="hidden bg-gray-900 py-20 scroll-mt-24" aria-hidden="true">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Details</h2>
@@ -505,7 +627,7 @@ const Portfolio: React.FC = () => {
       </section>
 
       {/* Anthem Sigma Technical Highlights */}
-      <section id="anthem-sigma-highlights" className="bg-gray-800/50 py-20 scroll-mt-24">
+      <section id="anthem-sigma-highlights-hidden" className="hidden bg-gray-800/50 py-20 scroll-mt-24" aria-hidden="true">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Highlights</h2>
@@ -763,6 +885,313 @@ const Portfolio: React.FC = () => {
               <div className="p-4 border-t border-gray-700/50">
                 <p className="text-sm text-gray-300">Loan Payoff</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Divider */}
+      <section className="bg-gray-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-700/50"></div>
+        </div>
+      </section>
+
+      {/* LEARN2 (ordered after FutureWorth) */}
+      <section id="learn2" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              LEARN<span className="text-blue-400 align-text-top">²</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-4 max-w-4xl mx-auto">
+              Front-end for the Landfalling Event Atmospheric River Neural Network (LEARN²):
+              a decision-support tool delivering extreme rainfall predictions up to 10 days out
+              using ensemble NWP guidance, remotely-sensed fields, teleconnection indices, and
+              neural networks with a voting mechanism.
+            </p>
+
+            <div className="flex justify-center">
+              <a
+                href="https://github.com/dpesall/Learn2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition-colors duration-200"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="learn2-features" className="bg-gray-800/50 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Key Features</h2>
+            <p className="text-gray-400 max-w-3xl mx-auto">
+              Forecast visualization and data access for extreme rainfall prediction across 1–10 day horizons
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Ensemble-driven Predictions</h3>
+              <p className="text-gray-300">Leverages GEFS and ECMWF ensembles with a neural “voting” approach to identify threshold exceedance.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Multiple Threshold Modes</h3>
+              <p className="text-gray-300">Switch between percentile (50th–99th) and static inch thresholds (0.25–4.0) for 10 look‑ahead days.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Data Access APIs</h3>
+              <p className="text-gray-300">Signed S3 image URLs and CSV retrieval endpoints back the UI for rapid per‑day exploration.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">Operational Focus</h3>
+              <p className="text-gray-300">Designed to aid meteorologists and hydrologists in medium‑range decision windows with higher confidence.</p>
+            </div>
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <h3 className="text-xl font-semibold text-white mb-3">User Feedback</h3>
+              <p className="text-gray-300">Built‑in feedback submission via Outlook email integration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="learn2-stack" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Stack</h2>
+            <p className="text-gray-400 max-w-3xl mx-auto">
+              Node.js + Express server powering a static front‑end with AWS S3 integrations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Backend
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Node.js with Express</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>AWS SDK (S3 signed URLs, object listing)</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>fast-csv for CSV parsing</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Nodemailer for feedback handling</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>dotenv for configuration</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50">
+              <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                <svg className="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                Frontend
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Static HTML/CSS with Bootstrap</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Interactive UI backed by S3 endpoints</li>
+                <li className="flex items-center"><span className="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>Deployed with HTTP/HTTPS server modes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Project Divider */}
+      <section className="bg-gray-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-700/50"></div>
+        </div>
+      </section>
+
+      {/* Anthem Sigma (ordered last) */}
+      <section id="anthem-sigma" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Anthem <span className="text-purple-400">Sigma</span>
+            </h1>
+            <p className="text-xl text-gray-300 mb-4 max-w-3xl mx-auto">
+              A comprehensive cryptography education tool implementing classical cipher algorithms
+              for learning, analysis, and recreational use.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://github.com/dpesall/Anthem-Sigma"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold text-lg transition-colors duration-200"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View Code
+              </a>
+              <a
+                href="https://github.com/dpesall/Anthem-Sigma/releases"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-semibold text-lg border border-gray-700 hover:border-gray-600 transition-all duration-200"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download App
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="anthem-sigma-features" className="bg-gray-800/50 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Key Features</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Comprehensive cryptography toolkit with cipher implementations and analysis tools
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <h3 className="text-xl font-semibold text-white ml-3">5 Classical Ciphers</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Caesar, Keyword, Affine, Vigenère, and Hill cipher implementations with customizable parameters and mathematical transformations</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                <h3 className="text-xl font-semibold text-white ml-3">Cryptanalysis Tools</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">Letter frequency analysis, N-gram pattern analysis, and monospace display for examining cipher text and breaking unknown encryptions</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-8 border border-gray-700/50 hover:border-gray-600/50 transition-all duration-200">
+              <div className="flex items-center mb-4">
+                <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253" />
+                </svg>
+                <h3 className="text-xl font-semibold text-white ml-3">Educational Interface</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed">File upload support, real-time validation, multi-page navigation, and built-in documentation for comprehensive learning experience</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="anthem-sigma-stack" className="bg-gray-900 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Details</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Windows desktop application built with modern .NET technologies
+            </p>
+          </div>
+
+          <div className="bg-gray-800/50 rounded-xl p-8 border border-gray-700/50 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <svg className="w-6 h-6 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Platform & Technology
+                </h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    Windows Desktop Application
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    C# with Windows Forms
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    .NET Framework 4.7.2
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    UTF-8 file encoding support
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-6 flex items-center">
+                  <svg className="w-6 h-6 text-purple-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253" />
+                  </svg>
+                  Educational Purpose
+                </h3>
+                <ul className="space-y-3 text-gray-300">
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    Cryptography students and educators
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    Computer science curriculum support
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    Puzzle enthusiasts and hobbyists
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-3"></span>
+                    Security awareness training
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="anthem-sigma-highlights" className="bg-gray-800/50 py-20 scroll-mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Highlights</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Showcasing desktop application development and cryptographic algorithm implementation
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
+              <h3 className="text-xl font-semibold text-purple-400 mb-3">Algorithm Implementation</h3>
+              <p className="text-gray-300 leading-relaxed">Five different cipher methods with proper mathematical transformations, matrix operations, and modular arithmetic calculations</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
+              <h3 className="text-xl font-semibold text-purple-400 mb-3">Analysis Capabilities</h3>
+              <p className="text-gray-300 leading-relaxed">Statistical analysis tools for cryptographic pattern recognition, frequency distribution, and N-gram pattern detection</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
+              <h3 className="text-xl font-semibold text-purple-400 mb-3">User Experience Design</h3>
+              <p className="text-gray-300 leading-relaxed">Intuitive Windows Forms interface with real-time validation, file processing capabilities, and organized multi-page navigation</p>
+            </div>
+
+            <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
+              <h3 className="text-xl font-semibold text-purple-400 mb-3">Educational Focus</h3>
+              <p className="text-gray-300 leading-relaxed">Built-in documentation, usage instructions, and educational content designed specifically for learning cryptographic concepts</p>
             </div>
           </div>
         </div>
