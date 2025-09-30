@@ -61,20 +61,34 @@ const Portfolio: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
+      const targetY = window.scrollY + window.innerHeight * 0.25;
 
-      for (const project of navigationItems) {
-        for (const section of project.sections) {
-          const element = document.getElementById(section.id);
-          if (element) {
-            const { offsetTop, offsetHeight } = element;
-            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-              setActiveSection(section.id);
-              break;
-            }
-          }
+      // Build a flat, ordered list of sections by their top positions
+      const sectionIds = navigationItems.flatMap(p => p.sections.map(s => s.id));
+      const sections = sectionIds
+        .map(id => {
+          const el = document.getElementById(id);
+          if (!el) return null;
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          return { id, top } as { id: string; top: number };
+        })
+        .filter(Boolean) as { id: string; top: number }[];
+
+      if (sections.length === 0) return;
+
+      // Ensure sorted by top (DOM order should already be sorted, but be safe)
+      sections.sort((a, b) => a.top - b.top);
+
+      // Use midpoints between adjacent section tops as boundaries so there are no gaps
+      for (let i = 0; i < sections.length - 1; i++) {
+        const boundary = (sections[i].top + sections[i + 1].top) / 2;
+        if (targetY < boundary) {
+          setActiveSection(sections[i].id);
+          return;
         }
       }
+      // If beyond last boundary, activate the last section
+      setActiveSection(sections[sections.length - 1].id);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -1164,7 +1178,7 @@ const Portfolio: React.FC = () => {
         </div>
       </section>
 
-      <section id="anthem-sigma-highlights" className="bg-gray-800/50 py-20 scroll-mt-24">
+      <section id="anthem-sigma-highlights" className="bg-gray-800/50 py-20 pb-48 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Technical Highlights</h2>
